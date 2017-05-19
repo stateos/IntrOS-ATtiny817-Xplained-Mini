@@ -1,0 +1,129 @@
+IntrOS
+---------
+Free, simple and tiny cooperative operating system (OS) designed for deeply embedded applications.
+Target: ARM Cortex-M, STM8, AVR8 families.
+It was inspired by the concept of a state machine.
+Procedure executed by the task (task state) doesn't have to be noreturn-type.
+It will be executed into an infinite loop.
+There's a dedicated function for immediate change the task state.
+---------
+Features:
+- kernel works in cooperative mode only
+- kernel can operate in tick-less mode (32-bit timer required)
+- signals (clear, protect)
+- events
+- flags (any, all)
+- barriers
+- semaphores
+- mutexes
+- condition variables
+- message queues
+- mailbox queues
+- timers (one-shot, periodic)
+- all documentation is contained within the source files
+---------
+2.9
+- changed tsk_suspend / tsk_resume functions
+- added tsk_suspend example
+- rebuilded port / core files
+- added support for ATtiny817-Xplained-Mini board
+---------
+2.8
+- updated OS_TMR / static_TMR macros
+- added OS_TMR_DEF / static_TMR_DEF macros
+- updated OS_WRK / static_WRK macros
+- renamed OS_DEF / static_DEF macros to OS_WRK_DEF / static_WRK_DEF
+- renamed OS_NEW / static_NEW macros to OS_TSK_DEF / static_TSK_DEF
+- updated examples
+---------
+2.7
+- added tick-less mode
+- function core_tsk_break renamed to core_tsk_switch
+- updated macros for task and timer objects
+- updated examples
+- reorganized kernel directories
+- updated objects definitions
+---------
+2.6
+- rename flgOne to flgAny
+- function mem_reset renamed to mem_bind
+- redefined timer macros and procedures
+- function core_tsk_start renamed to core_tsk_loop
+---------
+2.5
+- added oslibc.c file for COSMIC Software CORTEX-M C Cross Compiler
+- added _TSK_CREATE macro in os_tsk.h file
+- changed OS_DEF macro and added OS_NEW macro in os_tsk.h file
+- added changes in some definitions
+- context switch is realized by functions setjmp / longjmp
+- rebuilded kernel
+---------
+2.4
+- rebuilded internal preprocessor definitions
+- rebuilded data structures
+- rebuilded c++ classes
+- updated examples
+- added support for Small Device C Compiler
+---------
+2.3
+- some kernel improvements
+- added tsk_join function
+- added assertions
+---------
+2.2
+- added support for STM8S-Discovery board
+- updated timer object (tmr_start)
+- updated task object (tsk_wait, tsk_give)
+---------
+2.1
+- added list object
+- updated memory pool object
+- optimized c++ code
+---------
+2.0
+- added memory pool object
+- added memory pool example
+- fixed bug in memory pool object
+---------
+1.9
+- added support for COSMIC Software CORTEX-M C Cross Compiler
+---------
+1.8
+- program code cleaned
+---------
+1.7
+- changed startup files
+- fixed bug in core_ctx_switch for armclang and Cortex-M0
+---------
+1.6
+- fixed some bugs in arm clang code
+- fixed stack alignment
+- fixed some bugs
+---------
+1.5
+- added support for arm clang
+---------
+1.4
+- sys_init (port_sys_init) is invoked as a constructor
+---------
+1.3
+- minor update
+- added c++ examples
+- example files moved to dedicated folder
+- changed makefiles
+---------
+1.2
+- reorganization of the code
+- fixed bug in MailBoxQueueT<> class
+---------
+1.1
+- add signal object
+- add example for new feature
+- change flag object
+- add sig_take function
+- add some optimizations
+- change startup files
+- fixed bug in startup file for armcc compiler
+---------
+1.0
+- first release
