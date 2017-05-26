@@ -2,8 +2,8 @@
 
     @file    IntrOS: osport.c
     @author  Rajmund Szymanski
-    @date    24.04.2017
-    @brief   IntrOS port file for AVR uC.
+    @date    25.05.2017
+    @brief   IntrOS port file for ATtiny817 uC.
 
  ******************************************************************************
 

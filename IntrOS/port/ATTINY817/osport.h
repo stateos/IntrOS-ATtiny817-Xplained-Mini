@@ -2,8 +2,8 @@
 
     @file    IntrOS: osport.h
     @author  Rajmund Szymanski
-    @date    17.05.2017
-    @brief   IntrOS port definitions for AVR uC.
+    @date    25.05.2017
+    @brief   IntrOS port definitions for ATtiny817 uC.
 
  ******************************************************************************
 
@@ -43,7 +43,7 @@ extern "C" {
 #define  OS_TIMER             0
 #endif
 
-#if      OS_TIMER > 0
+#if      OS_TIMER
 #error   osconfig.h: Incorrect OS_TIMER value! This port does not support tick-less mode.
 #endif
 
