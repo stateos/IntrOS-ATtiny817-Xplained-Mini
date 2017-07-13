@@ -4,3 +4,6 @@
 [submodule "IntrOS/kernel"]
 	path = IntrOS/kernel
 	url = https://github.com/rajszym/IntrOS-kernel
+[submodule "IntrOS/port/AVR8"]
+	path = IntrOS/port/AVR8
+	url = https://github.com/rajszym/IntrOS-port-AVR8
