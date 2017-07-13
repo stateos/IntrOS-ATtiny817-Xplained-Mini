@@ -7,6 +7,3 @@
 [submodule "IntrOS/port/AVR8"]
 	path = IntrOS/port/AVR8
 	url = https://github.com/rajszym/IntrOS-port-AVR8
-[submodule "IntrOS/port/ATTINY817"]
-	path = IntrOS/port/ATTINY817
-	url = https://github.com/rajszym/IntrOS-port-ATTINY817
