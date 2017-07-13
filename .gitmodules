@@ -1,6 +1,3 @@
 [submodule "IntrOS/interface"]
 	path = IntrOS/interface
 	url = https://github.com/rajszym/IntrOS-interface
-[submodule "IntrOS/kernel"]
-	path = IntrOS/kernel
-	url = https://github.com/rajszym/IntrOS-kernel
