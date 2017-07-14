@@ -2,7 +2,7 @@
 
     @file    IntrOS: osport.c
     @author  Rajmund Szymanski
-    @date    25.05.2017
+    @date    14.07.2017
     @brief   IntrOS port file for ATtiny817 uC.
 
  ******************************************************************************
@@ -41,11 +41,12 @@ void port_sys_init( void )
 	TCA0.SINGLE.CTRLB   = TCA_SINGLE_WGMODE_NORMAL_gc;
 	TCA0.SINGLE.CTRLA   = TCA_SINGLE_CLKSEL_DIV16_gc
 	                    | TCA_SINGLE_ENABLE_bm;
-	sei();
 
 /******************************************************************************
  End of configuration
 *******************************************************************************/
+
+	sei();
 }
 
 /* -------------------------------------------------------------------------- */

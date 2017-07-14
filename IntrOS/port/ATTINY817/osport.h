@@ -2,7 +2,7 @@
 
     @file    IntrOS: osport.h
     @author  Rajmund Szymanski
-    @date    12.07.2017
+    @date    14.07.2017
     @brief   IntrOS port definitions for ATtiny817 uC.
 
  ******************************************************************************
@@ -110,7 +110,7 @@ extern "C" {
 #define  __STATIC_INLINE      static inline
 #endif
 #ifndef  __WFI
-#define  __WFI
+#define  __WFI()
 #endif
 
 /* -------------------------------------------------------------------------- */
