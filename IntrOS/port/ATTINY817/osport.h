@@ -2,7 +2,7 @@
 
     @file    IntrOS: osport.h
     @author  Rajmund Szymanski
-    @date    14.07.2017
+    @date    22.07.2017
     @brief   IntrOS port definitions for ATtiny817 uC.
 
  ******************************************************************************
@@ -86,12 +86,16 @@ extern "C" {
 /* -------------------------------------------------------------------------- */
 
 #ifndef  OS_FUNCTIONAL
-#define  OS_FUNCTIONAL        0 /* c++ functional library header not included */
-#endif
 
-#if      OS_FUNCTIONAL && defined(__cplusplus)
+#define  OS_FUNCTIONAL        0 /* c++ functional library header not included */
+
+#elif    OS_FUNCTIONAL
+
+#if      defined(__cplusplus)
 #error   c++ functional library not allowed for this compiler.
 #endif
+
+#endif //OS_FUNCTIONAL
 
 /* -------------------------------------------------------------------------- */
 
