@@ -3,7 +3,7 @@
     @file    IntrOS: oscore.h
     @author  Rajmund Szymanski
     @date    24.07.2017
-    @brief   IntrOS port file for AVR uC.
+    @brief   IntrOS port file for AVR8 uC.
 
  ******************************************************************************
 
@@ -55,18 +55,6 @@ extern "C" {
 
 /* -------------------------------------------------------------------------- */
 
-#ifndef  __CONSTRUCTOR
-#define  __CONSTRUCTOR      __attribute__((constructor))
-#endif
-#ifndef  __NO_RETURN
-#define  __NO_RETURN        __attribute__((noreturn))
-#endif
-#ifndef  __WFI
-#define  __WFI()
-#endif
-
-/* -------------------------------------------------------------------------- */
-
 typedef  uint8_t              lck_t;
 typedef  uint8_t              stk_t;
 
@@ -76,7 +64,7 @@ extern   stk_t              __stack[];
 #define  MAIN_TOP           __stack+1
 
 #define  ASIZE( size ) \
- (((unsigned)( size )+(sizeof(stk_t)-1))/sizeof(stk_t))
+  (((unsigned)( size )+(sizeof(stk_t)-1))/sizeof(stk_t))
 
 /* -------------------------------------------------------------------------- */
 /*

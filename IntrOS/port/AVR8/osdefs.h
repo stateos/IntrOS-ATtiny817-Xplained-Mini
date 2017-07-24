@@ -1,9 +1,9 @@
 /******************************************************************************
 
-    @file    IntrOS: osport.h
+    @file    IntrOS: osdefs.h
     @author  Rajmund Szymanski
     @date    24.07.2017
-    @brief   IntrOS port definitions for ATtiny817 uC.
+    @brief   IntrOS port file for AVR8 uC.
 
  ******************************************************************************
 
@@ -26,50 +26,24 @@
 
  ******************************************************************************/
 
-#ifndef __INTROSPORT_H
-#define __INTROSPORT_H
+#ifndef __INTROSDEFS_H
+#define __INTROSDEFS_H
 
-#include <avr/io.h>
-#include <avr/interrupt.h>
-#include <osconfig.h>
-#include <osdefs.h>
+/* -------------------------------------------------------------------------- */
 
-#ifdef __cplusplus
-extern "C" {
+#ifndef  __CONSTRUCTOR
+#define  __CONSTRUCTOR      __attribute__((constructor))
+#endif
+#ifndef  __NO_RETURN
+#define  __NO_RETURN        __attribute__((noreturn))
+#endif
+#ifndef  __STATIC_INLINE
+#define  __STATIC_INLINE      static inline
+#endif
+#ifndef  __WFI
+#define  __WFI()
 #endif
 
 /* -------------------------------------------------------------------------- */
 
-#ifndef  OS_TIMER
-#define  OS_TIMER             0
-#endif
-
-#if      OS_TIMER
-#error   osconfig.h: Incorrect OS_TIMER value! This port does not support tick-less mode.
-#endif
-
-/* -------------------------------------------------------------------------- */
-
-#ifndef CPU_FREQUENCY
-#define CPU_FREQUENCY         F_CPU
-#endif
-
-/* -------------------------------------------------------------------------- */
-
-#ifndef  OS_FREQUENCY
-#define  OS_FREQUENCY      1000 /* Hz */
-#endif
-
-#if     (OS_FREQUENCY > 1000)
-#error   osconfig.h: Incorrect OS_FREQUENCY value!
-#endif
-
-/* -------------------------------------------------------------------------- */
-
-#ifdef __cplusplus
-}
-#endif
-
-/* -------------------------------------------------------------------------- */
-
-#endif//__INTROSPORT_H
+#endif//__INTROSDEFS_H
