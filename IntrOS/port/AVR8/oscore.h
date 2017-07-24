@@ -2,7 +2,7 @@
 
     @file    IntrOS: oscore.h
     @author  Rajmund Szymanski
-    @date    06.07.2017
+    @date    23.07.2017
     @brief   IntrOS port file for AVR uC.
 
  ******************************************************************************
@@ -33,6 +33,36 @@
 
 #ifdef __cplusplus
 extern "C" {
+#endif
+
+/* -------------------------------------------------------------------------- */
+
+#ifndef  OS_STACK_SIZE
+#define  OS_STACK_SIZE       64 /* default task stack size in bytes           */
+#endif
+
+/* -------------------------------------------------------------------------- */
+
+#ifndef  OS_FUNCTIONAL
+
+#define  OS_FUNCTIONAL        0 /* c++ functional library header not included */
+
+#elif    OS_FUNCTIONAL
+
+#error   c++ functional library not allowed for this compiler.
+
+#endif //OS_FUNCTIONAL
+
+/* -------------------------------------------------------------------------- */
+
+#ifndef  __CONSTRUCTOR
+#define  __CONSTRUCTOR      __attribute__((constructor))
+#endif
+#ifndef  __NO_RETURN
+#define  __NO_RETURN        __attribute__(( noreturn ))
+#endif
+#ifndef  __WFI
+#define  __WFI()
 #endif
 
 /* -------------------------------------------------------------------------- */

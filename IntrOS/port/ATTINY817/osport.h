@@ -2,7 +2,7 @@
 
     @file    IntrOS: osport.h
     @author  Rajmund Szymanski
-    @date    22.07.2017
+    @date    23.07.2017
     @brief   IntrOS port definitions for ATtiny817 uC.
 
  ******************************************************************************
@@ -65,56 +65,8 @@ extern "C" {
 
 /* -------------------------------------------------------------------------- */
 
-#ifndef  OS_STACK_SIZE
-#define  OS_STACK_SIZE       64 /* default task stack size in bytes           */
-#endif
-
-/* -------------------------------------------------------------------------- */
-
-#ifndef  OS_ASSERT
-#define  OS_ASSERT            0 /* do not include standard assertions         */
-#endif
-
-#if     (OS_ASSERT == 0)
-#ifndef  NDEBUG
-#define  NDEBUG
-#endif
-#endif
-
-#include <assert.h>
-
-/* -------------------------------------------------------------------------- */
-
-#ifndef  OS_FUNCTIONAL
-
-#define  OS_FUNCTIONAL        0 /* c++ functional library header not included */
-
-#elif    OS_FUNCTIONAL
-
-#if      defined(__cplusplus)
-#error   c++ functional library not allowed for this compiler.
-#endif
-
-#endif //OS_FUNCTIONAL
-
-/* -------------------------------------------------------------------------- */
-
-#define  __INIT(N)          __attribute__((used, naked, optimize("s"), section(".init"#N)))
-#define  __FINI(N)          __attribute__((used, naked, optimize("s"), section(".fini"#N)))
-
-/* -------------------------------------------------------------------------- */
-
-#ifndef  __CONSTRUCTOR
-#define  __CONSTRUCTOR      __INIT(5)
-#endif
-#ifndef  __NO_RETURN
-#define  __NO_RETURN        __attribute__(( noreturn ))
-#endif
 #ifndef  __STATIC_INLINE
 #define  __STATIC_INLINE      static inline
-#endif
-#ifndef  __WFI
-#define  __WFI()
 #endif
 
 /* -------------------------------------------------------------------------- */
