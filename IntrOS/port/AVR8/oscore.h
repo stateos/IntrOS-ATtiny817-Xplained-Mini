@@ -2,7 +2,7 @@
 
     @file    IntrOS: oscore.h
     @author  Rajmund Szymanski
-    @date    23.07.2017
+    @date    24.07.2017
     @brief   IntrOS port file for AVR uC.
 
  ******************************************************************************
@@ -59,7 +59,7 @@ extern "C" {
 #define  __CONSTRUCTOR      __attribute__((constructor))
 #endif
 #ifndef  __NO_RETURN
-#define  __NO_RETURN        __attribute__(( noreturn ))
+#define  __NO_RETURN        __attribute__((noreturn))
 #endif
 #ifndef  __WFI
 #define  __WFI()
