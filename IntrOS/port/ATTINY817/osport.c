@@ -2,7 +2,7 @@
 
     @file    IntrOS: osport.c
     @author  Rajmund Szymanski
-    @date    14.07.2017
+    @date    01.08.2017
     @brief   IntrOS port file for ATtiny817 uC.
 
  ******************************************************************************
@@ -32,8 +32,10 @@
 
 void port_sys_init( void )
 {
+#if OS_TICKLESS == 0
+
 /******************************************************************************
- Put here configuration of system timer
+ Put here configuration of system timer for non-tick-less mode
 *******************************************************************************/
 
 	TCA0.SINGLE.PER     = CPU_FREQUENCY / OS_FREQUENCY / 16 - 1;
@@ -46,15 +48,17 @@ void port_sys_init( void )
  End of configuration
 *******************************************************************************/
 
+#endif//OS_TICKLESS
+
 	sei();
 }
 
 /* -------------------------------------------------------------------------- */
 
-#if OS_TIMER == 0
+#if OS_TICKLESS == 0
 
 /******************************************************************************
- Put here the procedure of interrupt handler of system timer
+ Put here the procedure of interrupt handler of system timer for non-tick-less mode
 *******************************************************************************/
 
 ISR( TCA0_OVF_vect )
@@ -67,6 +71,6 @@ ISR( TCA0_OVF_vect )
  End of the procedure of interrupt handler
 *******************************************************************************/
 
-#endif//OS_TIMER
+#endif//OS_TICKLESS
 
 /* -------------------------------------------------------------------------- */

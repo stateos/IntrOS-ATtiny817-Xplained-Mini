@@ -2,7 +2,7 @@
 
     @file    IntrOS: osport.h
     @author  Rajmund Szymanski
-    @date    24.07.2017
+    @date    01.08.2017
     @brief   IntrOS port definitions for ATtiny817 uC.
 
  ******************************************************************************
@@ -40,12 +40,12 @@ extern "C" {
 
 /* -------------------------------------------------------------------------- */
 
-#ifndef  OS_TIMER
-#define  OS_TIMER             0
+#ifndef  OS_TICKLESS
+#define  OS_TICKLESS          0 /* os not works in tick-less mode             */
 #endif
 
-#if      OS_TIMER
-#error   osconfig.h: Incorrect OS_TIMER value! This port does not support tick-less mode.
+#if      OS_TICKLESS
+#error   osconfig.h: Incorrect OS_TICKLESS value! This port does not support tick-less mode.
 #endif
 
 /* -------------------------------------------------------------------------- */
