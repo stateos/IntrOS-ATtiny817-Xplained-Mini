@@ -36,6 +36,7 @@ void port_sys_init( void )
 
 /******************************************************************************
  Non-tick-less mode: configuration of system timer
+ It must generate interrupts with frequency OS_FREQUENCY
 *******************************************************************************/
 
 	TCA0.SINGLE.PER     = CPU_FREQUENCY / OS_FREQUENCY / 16 - 1;
