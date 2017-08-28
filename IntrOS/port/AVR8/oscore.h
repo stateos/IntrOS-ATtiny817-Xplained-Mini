@@ -2,7 +2,7 @@
 
     @file    IntrOS: oscore.h
     @author  Rajmund Szymanski
-    @date    24.07.2017
+    @date    28.08.2017
     @brief   IntrOS port file for AVR8 uC.
 
  ******************************************************************************
@@ -112,6 +112,15 @@ void port_ctx_init( ctx_t *ctx, stk_t *sp, fun_t *pc )
 {
 	ctx->sp = sp - 1;
 	ctx->pc = pc;
+}
+
+/* -------------------------------------------------------------------------- */
+
+// get current stack pointer
+__STATIC_INLINE
+void * port_get_sp( void )
+{
+	return (void *) SP;
 }
 
 /* -------------------------------------------------------------------------- */
