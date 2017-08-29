@@ -2,7 +2,7 @@
 
     @file    IntrOS: oscore.h
     @author  Rajmund Szymanski
-    @date    28.08.2017
+    @date    29.08.2017
     @brief   IntrOS port file for AVR8 uC.
 
  ******************************************************************************
@@ -63,22 +63,8 @@ typedef  uint8_t              stk_t;
 extern   stk_t              __stack[];
 #define  MAIN_TOP           __stack+1
 
-#define  ASIZE( size ) \
-  (((unsigned)( size )+(sizeof(stk_t)-1))/sizeof(stk_t))
-
 /* -------------------------------------------------------------------------- */
-/*
-	jmp_buf:
-	offset	size	description
-    ------------
-	   0    16/2    call-saved registers (r2-r17) / AVR_TINY arch has only 2 call saved registers (r18,r19)
-	16/2       2    frame pointer        (r29:r28)
-	18/4       2    stack pointer        (SPH:SPL)
-	20/6       1    status register      (SREG)
-	21/7     2/3    return address       (PC) / 2 bytes used for <=128Kw flash / AVR_TINY arch always has 2 bytes PC
-    ------------
-	     23/24/9    total size
-*/
+
 // task context
 
 typedef struct __ctx ctx_t;
