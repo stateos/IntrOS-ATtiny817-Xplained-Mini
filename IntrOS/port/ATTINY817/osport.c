@@ -2,7 +2,7 @@
 
     @file    IntrOS: osport.c
     @author  Rajmund Szymanski
-    @date    08.08.2017
+    @date    27.09.2017
     @brief   IntrOS port file for ATtiny817 uC.
 
  ******************************************************************************
@@ -65,7 +65,7 @@ void port_sys_init( void )
 ISR( TCA0_OVF_vect )
 {
 	TCA0.SINGLE.INTFLAGS = TCA_SINGLE_OVF_bm;
-	System.cnt++;
+	core_sys_tick();
 }
 
 /******************************************************************************
