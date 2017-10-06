@@ -1,0 +1,24 @@
+sudo: required
+
+language: c
+
+os: linux
+
+dist: trusty
+
+compiler: avr-gcc
+
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y gcc-avr binutils-avr avr-libc
+
+install:
+  - wget https://github.com/stateos/IntrOS/archive/master.zip -O IntrOS-master.zip
+  - unzip -q -d . IntrOS-master.zip IntrOS-master/IntrOS/kernel/*
+  - mv -T IntrOS-master/IntrOS/kernel/ IntrOS/kernel/
+
+before_script: avr-gcc --version
+
+script: make all GNUCC=avr-
+
+group: stable
