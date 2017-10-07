@@ -13,9 +13,10 @@ before_install:
   - sudo apt-get install -y gcc-avr binutils-avr avr-libc
 
 install:
-  - wget https://github.com/stateos/IntrOS/archive/master.zip -O IntrOS-master.zip
-  - unzip -q -d . IntrOS-master.zip IntrOS-master/IntrOS/kernel/*
+  - wget https://github.com/stateos/IntrOS/archive/master.zip
+  - unzip -q master.zip
   - mv -T IntrOS-master/IntrOS/kernel/ IntrOS/kernel/
+  - rm -r IntrOS-master
 
 before_script: avr-gcc --version
 
