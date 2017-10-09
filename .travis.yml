@@ -1,12 +1,9 @@
-sudo: required
-
+sudo:     required
 language: c
-
-os: linux
-
-dist: trusty
-
-compiler: avr-gcc
+os:       linux
+# dist:     trusty
+# compiler: avr-gcc
+# group:    stable
 
 before_install:
   - sudo apt-get update -qq
@@ -21,5 +18,3 @@ install:
 before_script: avr-gcc --version
 
 script: make all GNUCC=avr-
-
-group: stable
