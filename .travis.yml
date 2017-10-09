@@ -1,9 +1,7 @@
 os:       linux
-# dist:     trusty
-# group:    stable
+dist:     trusty
 sudo:     required
-language: c
-# compiler: avr-gcc
+language: generic
 
 before_install:
   - sudo apt-get update -qq
