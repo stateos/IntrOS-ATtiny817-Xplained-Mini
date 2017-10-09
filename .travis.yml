@@ -1,9 +1,9 @@
 sudo:     required
 language: c
 os:       linux
-# dist:     trusty
+dist:     zesty
+group:    stable
 # compiler: avr-gcc
-# group:    stable
 
 before_install:
   - sudo apt-get update -qq
