@@ -1,6 +1,6 @@
 os:       linux
 # dist:     trusty
-# group:    stable
+group:    update
 sudo:     required
 language: c
 # compiler: avr-gcc
