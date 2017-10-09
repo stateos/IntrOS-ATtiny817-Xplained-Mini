@@ -1,8 +1,8 @@
+os:       linux
+# dist:     trusty
+# group:    stable
 sudo:     required
 language: c
-os:       linux
-dist:     zesty
-group:    stable
 # compiler: avr-gcc
 
 before_install:
