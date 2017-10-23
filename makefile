@@ -5,7 +5,7 @@
 #brief    AVR makefile.
 #**********************************************************#
 
-GNUCC      := c:/sys/gcc-avr/bin/avr-
+GNUCC      := c:/sys/avr-gcc/bin/avr-
 PROGRAM     = c:/sys/tools/atprogram/atprogram -t medbg -i updi -d $(TARGET)
 
 #----------------------------------------------------------#
