@@ -68,7 +68,6 @@ extern  stk_t               __stack[];
 #define MAIN_TOP            __stack+1
 
 /* -------------------------------------------------------------------------- */
-
 // task context
 
 typedef struct __ctx ctx_t;
@@ -96,6 +95,7 @@ struct __ctx
 #endif
 
 /* -------------------------------------------------------------------------- */
+// init task context
 
 __STATIC_INLINE
 void port_ctx_init( ctx_t *ctx, stk_t *sp, fun_t *pc )
@@ -105,8 +105,8 @@ void port_ctx_init( ctx_t *ctx, stk_t *sp, fun_t *pc )
 }
 
 /* -------------------------------------------------------------------------- */
-
 // get current stack pointer
+
 __STATIC_INLINE
 void * port_get_sp( void )
 {
