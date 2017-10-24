@@ -2,7 +2,7 @@
 
     @file    IntrOS: osdefs.h
     @author  Rajmund Szymanski
-    @date    24.07.2017
+    @date    24.10.2017
     @brief   IntrOS port file for AVR8 uC.
 
  ******************************************************************************
@@ -31,17 +31,17 @@
 
 /* -------------------------------------------------------------------------- */
 
-#ifndef  __CONSTRUCTOR
-#define  __CONSTRUCTOR      __attribute__((constructor))
+#ifndef __CONSTRUCTOR
+#define __CONSTRUCTOR       __attribute__((constructor))
 #endif
-#ifndef  __NO_RETURN
-#define  __NO_RETURN        __attribute__((noreturn))
+#ifndef __NO_RETURN
+#define __NO_RETURN         __attribute__((noreturn))
 #endif
-#ifndef  __STATIC_INLINE
-#define  __STATIC_INLINE      static inline
+#ifndef __STATIC_INLINE
+#define __STATIC_INLINE       static inline
 #endif
-#ifndef  __WFI
-#define  __WFI()
+#ifndef __WFI
+#define __WFI()
 #endif
 
 /* -------------------------------------------------------------------------- */

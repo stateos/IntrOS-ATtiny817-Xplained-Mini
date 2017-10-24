@@ -2,7 +2,7 @@
 
     @file    IntrOS: osport.c
     @author  Rajmund Szymanski
-    @date    27.09.2017
+    @date    24.10.2017
     @brief   IntrOS port file for ATtiny817 uC.
 
  ******************************************************************************
@@ -39,7 +39,7 @@ void port_sys_init( void )
  It must generate interrupts with frequency OS_FREQUENCY
 *******************************************************************************/
 
-	TCA0.SINGLE.PER     = CPU_FREQUENCY / OS_FREQUENCY / 16 - 1;
+	TCA0.SINGLE.PER     = (CPU_FREQUENCY)/(OS_FREQUENCY)/16-1;
 	TCA0.SINGLE.INTCTRL = TCA_SINGLE_OVF_bm;
 	TCA0.SINGLE.CTRLB   = TCA_SINGLE_WGMODE_NORMAL_gc;
 	TCA0.SINGLE.CTRLA   = TCA_SINGLE_CLKSEL_DIV16_gc
@@ -51,7 +51,7 @@ void port_sys_init( void )
 
 #endif//OS_TICKLESS
 
-	sei();
+	port_clr_lock();
 }
 
 /* -------------------------------------------------------------------------- */

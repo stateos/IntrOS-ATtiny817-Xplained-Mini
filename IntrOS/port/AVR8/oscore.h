@@ -2,7 +2,7 @@
 
     @file    IntrOS: oscore.h
     @author  Rajmund Szymanski
-    @date    18.09.2017
+    @date    24.10.2017
     @brief   IntrOS port file for AVR8 uC.
 
  ******************************************************************************
@@ -37,35 +37,35 @@ extern "C" {
 
 /* -------------------------------------------------------------------------- */
 
-#ifndef  OS_STACK_SIZE
-#define  OS_STACK_SIZE       64 /* default task stack size in bytes           */
+#ifndef OS_STACK_SIZE
+#define OS_STACK_SIZE        64 /* default task stack size in bytes           */
 #endif
 
 /* -------------------------------------------------------------------------- */
 
-#ifdef __cplusplus
+#ifdef  __cplusplus
 
-#ifndef  OS_FUNCTIONAL
+#ifndef OS_FUNCTIONAL
 
-#define  OS_FUNCTIONAL        0 /* c++ functional library header not included */
+#define OS_FUNCTIONAL         0 /* c++ functional library header not included */
 
-#elif    OS_FUNCTIONAL
+#elif   OS_FUNCTIONAL
 
-#error   c++ functional library not allowed for this compiler.
+#error  c++ functional library not allowed for this compiler.
 
-#endif //OS_FUNCTIONAL
+#endif//OS_FUNCTIONAL
 
 #endif
 
 /* -------------------------------------------------------------------------- */
 
-typedef  uint8_t              lck_t;
-typedef  uint8_t              stk_t;
+typedef uint8_t               lck_t;
+typedef uint8_t               stk_t;
 
 /* -------------------------------------------------------------------------- */
 
-extern   stk_t              __stack[];
-#define  MAIN_TOP           __stack+1
+extern  stk_t               __stack[];
+#define MAIN_TOP            __stack+1
 
 /* -------------------------------------------------------------------------- */
 
@@ -115,20 +115,22 @@ void * port_get_sp( void )
 
 /* -------------------------------------------------------------------------- */
 
-#define  port_get_lock()      SREG
-#define  port_put_lock(lck)   SREG = lck
+#define port_get_lock()       SREG
+#define port_put_lock(lck)    SREG = lck
 
-#define  port_set_lock()      cli()
-#define  port_clr_lock()      sei()
+#define port_set_lock()       cli()
+#define port_clr_lock()       sei()
 
-#define  port_sys_lock()      do { lck_t __LOCK = port_get_lock(); port_set_lock()
-#define  port_sys_unlock()         port_put_lock(__LOCK); } while(0)
+#define port_sys_lock()  do { lck_t __LOCK = port_get_lock(); port_set_lock()
+#define port_sys_unlock()     port_put_lock(__LOCK); } while(0)
 
-#define  port_isr_lock()      do { port_set_lock()
-#define  port_isr_unlock()         port_clr_lock(); } while(0)
+#define port_isr_lock()  do { port_set_lock()
+#define port_isr_unlock()     port_clr_lock(); } while(0)
 
-#define  port_cnt_lock()      do { lck_t __LOCK = port_get_lock(); port_set_lock()
-#define  port_cnt_unlock()         port_put_lock(__LOCK); } while(0)
+#define port_cnt_lock()  do { lck_t __LOCK = port_get_lock(); port_set_lock()
+#define port_cnt_unlock()     port_put_lock(__LOCK); } while(0)
+
+#define port_set_barrier()    asm volatile ("nop" ::: "memory")
 
 /* -------------------------------------------------------------------------- */
 
