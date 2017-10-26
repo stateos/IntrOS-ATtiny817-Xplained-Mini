@@ -5,7 +5,7 @@ language: generic
 install:
   - sudo apt-get update -qq
 # - sudo apt-get install -y gcc-avr binutils-avr avr-libc
-  - sudo bash ./.avr-gcc-build.sh
+  - sudo bash ./.build-avr-gcc.sh
   - avr-gcc --version
 
 before_script:
