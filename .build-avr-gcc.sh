@@ -1,48 +1,35 @@
-#! /bin/bash
+#!/bin/bash
 
 set -e
 
-SRCDIR="source"
-BINDIR="build"
-INSTALL_DIR="/usr"
+OUTDIR = "build"
 
-rm -rf   $SRCDIR
-
-BINUTILS_VERSION="2.29"
-
+BINVER = "2.29"
 # get the source code
-mkdir -p $SRCDIR/$BINDIR
-cd       $SRCDIR
-wget     ftp://ftp.mirrorservice.org/sites/ftp.gnu.org/gnu/binutils/binutils-$BINUTILS_VERSION.tar.xz
-tar -xf  binutils-$BINUTILS_VERSION.tar.xz
-# create the build directory
-cd       $BINDIR
-# build
-../binutils-$BINUTILS_VERSION/configure \
-         --prefix=$INSTALL_DIR          \
-         --target=avr                   \
+wget     ftp://ftp.mirrorservice.org/sites/ftp.gnu.org/gnu/binutils/binutils-$BINVER.tar.xz
+tar -xf  binutils-$BINVER.tar.xz
+# build and install
+mkdir -p binutils-$BINVER/$OUTDIR
+cd       binutils-$BINVER/$OUTDIR
+../configure          \
+         --target=avr \
          --disable-nls
 make -s
 make -s  install
 cd       ../..
-rm -rf   $SRCDIR
+rm -rf   binutils-$BINVER
 
-GCC_VERSION="7.2.0"
-
+GCCVER = "7.2.0"
 # get the source code
-mkdir -p $SRCDIR/$BINDIR
-cd       $SRCDIR
-wget     ftp://ftp.mirrorservice.org/sites/sourceware.org/pub/gcc/releases/gcc-$GCC_VERSION/gcc-$GCC_VERSION.tar.xz
-tar -xf  gcc-$GCC_VERSION.tar.xz
+wget     ftp://ftp.mirrorservice.org/sites/sourceware.org/pub/gcc/releases/gcc-$GCCVER/gcc-$GCCVER.tar.xz
+tar -xf  gcc-$GCCVER.tar.xz
 # download the prerequisites
-cd       gcc-${GCC_VERSION}
+cd       gcc-$GCCVER
 ./contrib/download_prerequisites
-# create the build directory
-cd       ..
-cd       $BINDIR
-# build
-../gcc-$GCC_VERSION/configure     \
-         --prefix=$INSTALL_DIR    \
+# build and install
+mkdir -p $OUTDIR
+cd       $OUTDIR
+../configure                      \
          --target=avr             \
          --enable-languages=c,c++ \
          --disable-libssp         \
@@ -54,23 +41,19 @@ cd       $BINDIR
 make -s
 make -s  install
 cd       ../..
-rm -rf   $SRCDIR
+rm -rf   gcc-$GCCVER
 
-LIBC_VERSION="2.0.0"
-
+LIBVER = "2.0.0"
 # get the source code
-mkdir -p $SRCDIR/$BINDIR
-cd       $SRCDIR
-wget     ftp://ftp.mirrorservice.org/sites/download.savannah.gnu.org/releases/avr-libc/avr-libc-$LIBC_VERSION.tar.bz2
-tar -xf  avr-libc-$LIBC_VERSION.tar.bz2
-# create the build directory
-cd       $BINDIR
-# build
-../avr-libc-$LIBC_VERSION/configure \
-         --prefix=$INSTALL_DIR      \
-         --host=avr                 \
-         --build=`../avr-libc-$LIBC_VERSION/config.guess`
+wget     ftp://ftp.mirrorservice.org/sites/download.savannah.gnu.org/releases/avr-libc/avr-libc-$LIBVER.tar.bz2
+tar -xf  avr-libc-$LIBVER.tar.bz2
+# build and install
+mkdir -p avr-libc-$LIBVER/$OUTDIR
+cd       avr-libc-$LIBVER/$OUTDIR
+../configure        \
+         --host=avr \
+         --build=`../avr-libc-$LIBVER/config.guess`
 make -s
 make -s  install
 cd       ../..
-rm -rf   $SRCDIR
+rm -rf   avr-libc-$LIBVER
