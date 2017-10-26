@@ -2,9 +2,11 @@
 
 set -e
 
-OUTDIR = "build"
+OUTDIR="build"
+BINVER="2.29"
+GCCVER="7.2.0"
+LIBVER="2.0.0"
 
-BINVER = "2.29"
 # get the source code
 wget     ftp://ftp.mirrorservice.org/sites/ftp.gnu.org/gnu/binutils/binutils-$BINVER.tar.xz
 tar -xf  binutils-$BINVER.tar.xz
@@ -19,7 +21,6 @@ make -s  install
 cd       ../..
 rm -rf   binutils-$BINVER
 
-GCCVER = "7.2.0"
 # get the source code
 wget     ftp://ftp.mirrorservice.org/sites/sourceware.org/pub/gcc/releases/gcc-$GCCVER/gcc-$GCCVER.tar.xz
 tar -xf  gcc-$GCCVER.tar.xz
@@ -43,7 +44,6 @@ make -s  install
 cd       ../..
 rm -rf   gcc-$GCCVER
 
-LIBVER = "2.0.0"
 # get the source code
 wget     ftp://ftp.mirrorservice.org/sites/download.savannah.gnu.org/releases/avr-libc/avr-libc-$LIBVER.tar.bz2
 tar -xf  avr-libc-$LIBVER.tar.bz2
