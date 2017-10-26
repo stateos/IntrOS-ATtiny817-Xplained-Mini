@@ -23,7 +23,7 @@ GCCVER = "7.2.0"
 # get the source code
 wget     ftp://ftp.mirrorservice.org/sites/sourceware.org/pub/gcc/releases/gcc-$GCCVER/gcc-$GCCVER.tar.xz
 tar -xf  gcc-$GCCVER.tar.xz
-# download the prerequisites
+# download prerequisites
 cd       gcc-$GCCVER
 ./contrib/download_prerequisites
 # build and install
