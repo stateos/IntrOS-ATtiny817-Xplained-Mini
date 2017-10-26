@@ -133,7 +133,7 @@ confMake()
 {
 	../configure --prefix=$1 $2 $3 $4
 	make -s -j $JOBCOUNT
-	make -s install-strip
+	make -s install
 	rm -rf *
 }
 
