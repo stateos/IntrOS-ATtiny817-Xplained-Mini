@@ -2,9 +2,9 @@
 
 set -e
 
-SRCDIR="_src_"
-BINDIR="_bin_"
-INSTALL_DIR="/install"
+SRCDIR="source"
+BINDIR="build"
+INSTALL_DIR="/usr"
 
 rm -rf   $SRCDIR
 
@@ -55,9 +55,6 @@ make -s
 make -s  install
 cd       ../..
 rm -rf   $SRCDIR
-
-PATH="$PATH":"$INSTALL_DIR"/bin
-export PATH
 
 LIBC_VERSION="2.0.0"
 
