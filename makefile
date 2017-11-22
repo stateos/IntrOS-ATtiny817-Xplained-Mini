@@ -1,11 +1,11 @@
 #**********************************************************#
 #file     makefile
 #author   Rajmund Szymanski
-#date     18.05.2017
+#date     22.11.2017
 #brief    AVR makefile.
 #**********************************************************#
 
-GNUCC      := c:/sys/avr-gcc/bin/avr-
+GNUCC      := c:/sys/gcc/avr/bin/avr-
 PROGRAM     = c:/sys/tools/atprogram/atprogram -t medbg -i updi -d $(TARGET)
 
 #----------------------------------------------------------#
@@ -16,7 +16,7 @@ LIBS       ?=
 DIRS       ?=
 KEYS       ?=
 INCS       ?=
-OPTF       ?= s
+OPTF       ?= 2
 TARGET     ?= attiny817
 F_CPU      ?= 20000000
 
@@ -30,7 +30,7 @@ ifneq ($(F_CPU),)
 DEFS       += F_CPU=$(F_CPU)
 endif
 
-KEYS       += .gnucc .avr .$(TARGET) *
+KEYS       += .gnucc .$(TARGET) *
 INCS       +=  ./.
 
 #----------------------------------------------------------#
@@ -94,7 +94,7 @@ COMMON_F   += -O$(OPTF) -ffunction-sections -fdata-sections
 ifneq ($(filter USE_LTO,$(DEFS)),)
 COMMON_F   += -flto
 endif
-COMMON_F   += -Wall -Wextra # -Wpedantic
+COMMON_F   += -Wall -Wextra -Wpedantic
 COMMON_F   += -MD -MP
 COMMON_F   += # -Wa,-amhls=$(@:.o=.lst)
 COMMON_F   += # -g -ggdb
