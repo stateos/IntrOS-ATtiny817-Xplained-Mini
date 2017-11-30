@@ -1,7 +1,7 @@
 #include <os.h>
 #include <led.h>
 
-OS_SEM(sem, 0, semNormal);
+OS_SEM(sem, 0, semBinary);
 
 OS_TSK_START(sla, 0)
 {
