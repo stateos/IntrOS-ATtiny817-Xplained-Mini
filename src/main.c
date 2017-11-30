@@ -1,15 +1,15 @@
 #include <os.h>
 #include <led.h>
 
-OS_SEM(sem, 0);
+OS_SEM(sem, 0, semNormal);
 
-OS_TSK_DEF(sla)
+OS_TSK_START(sla, 0)
 {
 	sem_wait(sem);
 	led_toggle();
 }
 
-OS_TSK_DEF(mas)
+OS_TSK_START(mas, 0)
 {
 	tsk_delay(SEC);
 	sem_give(sem);
@@ -18,7 +18,5 @@ OS_TSK_DEF(mas)
 int main()
 {
 	led_init();
-	tsk_start(sla);
-	tsk_start(mas);
-	tsk_stop();
+	tsk_sleep();
 }
