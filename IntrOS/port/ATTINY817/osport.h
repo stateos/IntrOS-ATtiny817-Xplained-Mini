@@ -2,7 +2,7 @@
 
     @file    IntrOS: osport.h
     @author  Rajmund Szymanski
-    @date    24.10.2017
+    @date    20.12.2017
     @brief   IntrOS port definitions for ATtiny817 uC.
 
  ******************************************************************************
@@ -44,10 +44,6 @@ extern "C" {
 #define OS_TICKLESS           0 /* os does not work in tick-less mode         */
 #endif
 
-#if     OS_TICKLESS
-#error  osconfig.h: Incorrect OS_TICKLESS value! This port does not support tick-less mode.
-#endif
-
 /* -------------------------------------------------------------------------- */
 
 #ifndef CPU_FREQUENCY
@@ -57,10 +53,22 @@ extern "C" {
 /* -------------------------------------------------------------------------- */
 
 #ifndef OS_FREQUENCY
+
+#if     OS_TICKLESS
+#define OS_FREQUENCY         (CPU_FREQUENCY/16) /* Hz */
+#else
 #define OS_FREQUENCY       1000 /* Hz */
 #endif
 
-#if     OS_FREQUENCY > 1000
+#else //OS_FREQUENCY
+
+#if     OS_TICKLESS
+#error  osconfig.h: OS_FREAQUENCY for tick-less mode is calculated in this port!
+#endif
+
+#endif//OS_FREQUENCY
+
+#if    (OS_TICKLESS == 0) && (OS_FREQUENCY > 1000)
 #error  osconfig.h: Incorrect OS_FREQUENCY value!
 #endif
 
