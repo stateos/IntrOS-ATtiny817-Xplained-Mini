@@ -2,7 +2,7 @@
 
     @file    IntrOS: osport.c
     @author  Rajmund Szymanski
-    @date    20.12.2017
+    @date    21.12.2017
     @brief   IntrOS port file for ATtiny817 uC.
 
  ******************************************************************************
@@ -98,7 +98,7 @@ ISR( TCA0_OVF_vect )
 ISR( TCA0_OVF_vect )
 {
 	TCA0.SINGLE.INTFLAGS = 0xFF;
-	System.cnt += 1UL<<16; // TCA0.SINGLE.CNT is 16-bit
+	System.cnt += 1UL << 16; // TCA0.SINGLE.CNT is 16-bit
 }
 
 /******************************************************************************
@@ -117,7 +117,7 @@ uint32_t port_sys_time( void )
 	cnt = System.cnt;
 	tck = TCA0.SINGLE.CNT;
 
-	if (TCA0.SINGLE.INTFLAGS)
+	if (TCA0.SINGLE.INTFLAGS & TCA_SINGLE_OVF_bm)
 	{
 		cnt += 1UL << 16; // TCA0.SINGLE.CNT is 16-bit
 		tck = TCA0.SINGLE.CNT;
