@@ -2,7 +2,7 @@
 
     @file    IntrOS: osport.c
     @author  Rajmund Szymanski
-    @date    21.12.2017
+    @date    28.12.2017
     @brief   IntrOS port file for ATtiny817 uC.
 
  ******************************************************************************
@@ -32,7 +32,7 @@
 
 void port_sys_init( void )
 {
-#if OS_TICKLESS == 0
+#if HW_TIMER_SIZE == 0
 
 /******************************************************************************
  Non-tick-less mode: configuration of system timer
@@ -42,14 +42,13 @@ void port_sys_init( void )
 	TCA0.SINGLE.PER     = (CPU_FREQUENCY)/(OS_FREQUENCY)/16-1;
 	TCA0.SINGLE.INTCTRL = TCA_SINGLE_OVF_bm;
 	TCA0.SINGLE.CTRLB   = TCA_SINGLE_WGMODE_NORMAL_gc;
-	TCA0.SINGLE.CTRLA   = TCA_SINGLE_CLKSEL_DIV16_gc
-	                    | TCA_SINGLE_ENABLE_bm;
+	TCA0.SINGLE.CTRLA   = TCA_SINGLE_ENABLE_bm | TCA_SINGLE_CLKSEL_DIV16_gc;
 
 /******************************************************************************
  End of configuration
 *******************************************************************************/
 
-#else //OS_TICKLESS
+#else //HW_TIMER_SIZE
 
 /******************************************************************************
  Tick-less mode: configuration of system timer
@@ -59,21 +58,38 @@ void port_sys_init( void )
 	TCA0.SINGLE.PER     = UINT16_MAX;
 	TCA0.SINGLE.INTCTRL = TCA_SINGLE_OVF_bm;
 	TCA0.SINGLE.CTRLB   = TCA_SINGLE_WGMODE_NORMAL_gc;
-	TCA0.SINGLE.CTRLA   = TCA_SINGLE_CLKSEL_DIV16_gc
-	                    | TCA_SINGLE_ENABLE_bm;
+	#if   CPU_FREQUENCY == (OS_FREQUENCY) * 1
+	TCA0.SINGLE.CTRLA   = TCA_SINGLE_ENABLE_bm | TCA_SINGLE_CLKSEL_DIV1_gc;
+	#elif CPU_FREQUENCY == (OS_FREQUENCY) * 2
+	TCA0.SINGLE.CTRLA   = TCA_SINGLE_ENABLE_bm | TCA_SINGLE_CLKSEL_DIV2_gc;
+	#elif CPU_FREQUENCY == (OS_FREQUENCY) * 4
+	TCA0.SINGLE.CTRLA   = TCA_SINGLE_ENABLE_bm | TCA_SINGLE_CLKSEL_DIV4_gc;
+	#elif CPU_FREQUENCY == (OS_FREQUENCY) * 8
+	TCA0.SINGLE.CTRLA   = TCA_SINGLE_ENABLE_bm | TCA_SINGLE_CLKSEL_DIV8_gc;
+	#elif CPU_FREQUENCY == (OS_FREQUENCY) * 16
+	TCA0.SINGLE.CTRLA   = TCA_SINGLE_ENABLE_bm | TCA_SINGLE_CLKSEL_DIV16_gc;
+	#elif CPU_FREQUENCY == (OS_FREQUENCY) * 64
+	TCA0.SINGLE.CTRLA   = TCA_SINGLE_ENABLE_bm | TCA_SINGLE_CLKSEL_DIV64_gc;
+	#elif CPU_FREQUENCY == (OS_FREQUENCY) * 256
+	TCA0.SINGLE.CTRLA   = TCA_SINGLE_ENABLE_bm | TCA_SINGLE_CLKSEL_DIV256_gc;
+	#elif CPU_FREQUENCY == (OS_FREQUENCY) * 1024
+	TCA0.SINGLE.CTRLA   = TCA_SINGLE_ENABLE_bm | TCA_SINGLE_CLKSEL_DIV1024_gc;
+	#else
+	#error osconfig.h: Invalid OS_FREQUENCY value!
+	#endif
 
 /******************************************************************************
  End of configuration
 *******************************************************************************/
 
-#endif//OS_TICKLESS
+#endif//HW_TIMER_SIZE
 
 	port_clr_lock();
 }
 
 /* -------------------------------------------------------------------------- */
 
-#if OS_TICKLESS == 0
+#if HW_TIMER_SIZE == 0
 
 /******************************************************************************
  Non-tick-less mode: interrupt handler of system timer
@@ -81,15 +97,18 @@ void port_sys_init( void )
 
 ISR( TCA0_OVF_vect )
 {
-	TCA0.SINGLE.INTFLAGS = 0xFF;
-	core_sys_tick();
+//	if (TCA0.SINGLE.INTFLAGS & TCA_SINGLE_OVF_bm)
+	{
+		TCA0.SINGLE.INTFLAGS = TCA_SINGLE_OVF_bm;
+		core_sys_tick();
+	}
 }
 
 /******************************************************************************
  End of the handler
 *******************************************************************************/
 
-#else //OS_TICKLESS
+#else //HW_TIMER_SIZE
 
 /******************************************************************************
  Tick-less mode: interrupt handler of system timer
@@ -97,8 +116,11 @@ ISR( TCA0_OVF_vect )
 
 ISR( TCA0_OVF_vect )
 {
-	TCA0.SINGLE.INTFLAGS = 0xFF;
-	System.cnt += 1UL << 16; // TCA0.SINGLE.CNT is 16-bit
+//	if (TCA0.SINGLE.INTFLAGS & TCA_SINGLE_OVF_bm)
+	{
+		TCA0.SINGLE.INTFLAGS = TCA_SINGLE_OVF_bm;
+		core_sys_tick();
+	}
 }
 
 /******************************************************************************
@@ -119,8 +141,8 @@ uint32_t port_sys_time( void )
 
 	if (TCA0.SINGLE.INTFLAGS & TCA_SINGLE_OVF_bm)
 	{
-		cnt += 1UL << 16; // TCA0.SINGLE.CNT is 16-bit
 		tck = TCA0.SINGLE.CNT;
+		cnt += 1UL << (HW_TIMER_SIZE);
 	}
 
 	return cnt + tck;
@@ -130,6 +152,6 @@ uint32_t port_sys_time( void )
  End of the function
 *******************************************************************************/
 
-#endif//OS_TICKLESS
+#endif//HW_TIMER_SIZE
 
 /* -------------------------------------------------------------------------- */
