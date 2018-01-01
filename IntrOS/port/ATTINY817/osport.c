@@ -2,7 +2,7 @@
 
     @file    IntrOS: osport.c
     @author  Rajmund Szymanski
-    @date    28.12.2017
+    @date    01.01.2018
     @brief   IntrOS port file for ATtiny817 uC.
 
  ******************************************************************************
@@ -56,7 +56,9 @@ void port_sys_init( void )
 *******************************************************************************/
 
 	TCA0.SINGLE.PER     = UINT16_MAX;
+	#if HW_TIMER_SIZE < OS_TIMER_SIZE
 	TCA0.SINGLE.INTCTRL = TCA_SINGLE_OVF_bm;
+	#endif
 	TCA0.SINGLE.CTRLB   = TCA_SINGLE_WGMODE_NORMAL_gc;
 	#if   CPU_FREQUENCY == (OS_FREQUENCY) * 1
 	TCA0.SINGLE.CTRLA   = TCA_SINGLE_ENABLE_bm | TCA_SINGLE_CLKSEL_DIV1_gc;
@@ -114,6 +116,8 @@ ISR( TCA0_OVF_vect )
  Tick-less mode: interrupt handler of system timer
 *******************************************************************************/
 
+#if HW_TIMER_SIZE < OS_TIMER_SIZE
+
 ISR( TCA0_OVF_vect )
 {
 //	if (TCA0.SINGLE.INTFLAGS & TCA_SINGLE_OVF_bm)
@@ -123,6 +127,8 @@ ISR( TCA0_OVF_vect )
 	}
 }
 
+#endif
+
 /******************************************************************************
  End of the handler
 *******************************************************************************/
@@ -131,9 +137,11 @@ ISR( TCA0_OVF_vect )
  Tick-less mode: return current system time
 *******************************************************************************/
 
-uint32_t port_sys_time( void )
+#if HW_TIMER_SIZE < OS_TIMER_SIZE
+
+cnt_t port_sys_time( void )
 {
-	uint32_t cnt;
+	cnt_t    cnt;
 	uint16_t tck;
 
 	cnt = System.cnt;
@@ -142,11 +150,13 @@ uint32_t port_sys_time( void )
 	if (TCA0.SINGLE.INTFLAGS & TCA_SINGLE_OVF_bm)
 	{
 		tck = TCA0.SINGLE.CNT;
-		cnt += 1UL << (HW_TIMER_SIZE);
+		cnt += (cnt_t)(1) << (HW_TIMER_SIZE);
 	}
 
 	return cnt + tck;
 }
+
+#endif
 
 /******************************************************************************
  End of the function

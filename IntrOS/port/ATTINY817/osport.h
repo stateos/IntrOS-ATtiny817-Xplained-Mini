@@ -2,7 +2,7 @@
 
     @file    IntrOS: osport.h
     @author  Rajmund Szymanski
-    @date    28.12.2017
+    @date    01.01.2018
     @brief   IntrOS port definitions for ATtiny817 uC.
 
  ******************************************************************************
@@ -54,12 +54,31 @@ extern "C" {
 
 /* -------------------------------------------------------------------------- */
 
+#ifndef OS_TIMER_SIZE
+#define OS_TIMER_SIZE        32 /* bit size of system timer counter */
+#endif
+
+/* -------------------------------------------------------------------------- */
+
 #ifdef  HW_TIMER_SIZE
-#error  HW_TIMER_SIZE is an internal definition!
+#error  HW_TIMER_SIZE is an internal os definition!
 #elif   OS_FREQUENCY > 1000 
-#define HW_TIMER_SIZE        16
+#define HW_TIMER_SIZE        16 /* bit size of hardware timer */
 #else
-#define HW_TIMER_SIZE         0
+#define HW_TIMER_SIZE         0 /* os does not work in tick-less mode */
+#endif
+
+/* -------------------------------------------------------------------------- */
+// return current system time
+
+#if HW_TIMER_SIZE >= OS_TIMER_SIZE
+
+__STATIC_INLINE
+uint16_t port_sys_time( void )
+{
+	return TCA0.SINGLE.CNT;
+}
+
 #endif
 
 /* -------------------------------------------------------------------------- */
