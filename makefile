@@ -1,7 +1,7 @@
 #**********************************************************#
 #file     makefile
 #author   Rajmund Szymanski
-#date     22.11.2017
+#date     12.07.2018
 #brief    AVR makefile.
 #**********************************************************#
 
@@ -12,25 +12,25 @@ PROGRAM     = c:/sys/tools/atprogram/atprogram -t medbg -i updi -d $(TARGET)
 
 PROJECT    ?= $(notdir $(CURDIR))
 DEFS       ?=
-LIBS       ?=
 DIRS       ?=
-KEYS       ?=
 INCS       ?=
-OPTF       ?= 2
+LIBS       ?=
+KEYS       ?=
+OPTF       ?= 2 # s
 TARGET     ?= attiny817
 F_CPU      ?= 20000000
 
 #----------------------------------------------------------#
 
-ifeq  ($(TARGET),)
-$(error Undefined TARGET!)
-endif
-
 ifneq ($(F_CPU),)
 DEFS       += F_CPU=$(F_CPU)
 endif
 
-KEYS       += .gnucc .$(TARGET) *
+ifeq  ($(TARGET),)
+$(error Undefined TARGET!)
+endif
+
+KEYS       += .gnuc .avr8 .$(TARGET) *
 INCS       +=  ./.
 
 #----------------------------------------------------------#
@@ -99,6 +99,7 @@ COMMON_F   += -MD -MP
 COMMON_F   += # -Wa,-amhls=$(@:.o=.lst)
 COMMON_F   += # -g -ggdb
 COMMON_F   += -B .dev/$(TARGET)
+COMMON_F   += -mno-gas-isr-prologues
 
 AS_FLAGS    =
 C_FLAGS     = -std=gnu11
@@ -168,7 +169,7 @@ print_size :
 	$(info Size of modules:)
 	$(SIZE) -B -t --common $(OBJS_ALL)
 
-print_elf_size : print_size
+print_elf_size : # print_size
 	$(info Size of target file:)
 	$(SIZE) -B $(ELF)
 
