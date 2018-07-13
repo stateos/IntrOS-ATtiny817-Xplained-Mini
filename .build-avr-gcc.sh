@@ -8,7 +8,8 @@ GCCVER="8.1.0"
 LIBVER="2.0.0"
 
 # get the source code
-wget ftp://ftp.mirrorservice.org/sites/ftp.gnu.org/gnu/binutils/binutils-$BINVER.tar.xz
+wget https://sourceware.org/pub/binutils/releases/binutils-$BINVER.tar.xz
+# wget ftp://ftp.mirrorservice.org/sites/ftp.gnu.org/gnu/binutils/binutils-$BINVER.tar.xz
 tar -xf  binutils-$BINVER.tar.xz
 # build and install
 mkdir -p binutils-$BINVER/$OUTDIR
@@ -22,7 +23,8 @@ cd ../..
 rm -rf   binutils-$BINVER
 
 # get the source code
-wget ftp://ftp.mirrorservice.org/sites/sourceware.org/pub/gcc/releases/gcc-$GCCVER/gcc-$GCCVER.tar.xz
+wget https://sourceware.org/pub/gcc/releases/gcc-$GCCVER/gcc-$GCCVER.tar.xz
+# wget ftp://ftp.mirrorservice.org/sites/sourceware.org/pub/gcc/releases/gcc-$GCCVER/gcc-$GCCVER.tar.xz
 tar -xf  gcc-$GCCVER.tar.xz
 # download prerequisites
 cd       gcc-$GCCVER
@@ -45,7 +47,8 @@ cd ../..
 rm -rf   gcc-$GCCVER
 
 # get the source code
-wget ftp://ftp.mirrorservice.org/sites/download.savannah.gnu.org/releases/avr-libc/avr-libc-$LIBVER.tar.bz2
+wget http://download.savannah.gnu.org/releases/avr-libc/avr-libc-$LIBVER.tar.bz2
+# wget ftp://ftp.mirrorservice.org/sites/download.savannah.gnu.org/releases/avr-libc/avr-libc-$LIBVER.tar.bz2
 tar -xf  avr-libc-$LIBVER.tar.bz2
 # build and install
 mkdir -p avr-libc-$LIBVER/$OUTDIR
