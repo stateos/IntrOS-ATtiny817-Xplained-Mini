@@ -11,7 +11,7 @@ install:
 before_script:
   - wget https://github.com/stateos/IntrOS/archive/master.zip
   - unzip -q master.zip
-  - mv -T IntrOS-master/IntrOS/kernel/ IntrOS/kernel/
+  - mv IntrOS-master/IntrOS/* IntrOS/
   - rm -r IntrOS-master
 
 script: make all GNUCC=avr-
