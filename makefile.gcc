@@ -1,0 +1,17 @@
+PROJECT := test
+DEFS    :=
+INCS    := include
+SRCS    := src/main.cpp
+LIBS    :=
+COMMON  := common
+
+#----------------------------------------------------------#
+include $(COMMON)/intros/make/attiny817xmini/makefile.gcc
+#----------------------------------------------------------#
+
+include $(COMMON)/device/makefile
+include $(COMMON)/intros/makefile
+
+#----------------------------------------------------------#
+include $(COMMON)/make/makefile
+#----------------------------------------------------------#

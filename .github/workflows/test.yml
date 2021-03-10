@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'LICENSE'
+      - 'README.md'
+
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - 'LICENSE'
+      - 'README.md'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout repository
+      uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: install dependencies
+      run: sudo apt-get -y -qq update
+    - name: build sdcc
+      run: bash ./.build-avr-gcc.sh
+    - name: check sdcc version
+      run: avr-gcc --version
+    - name: make test
+      run: make all -f makefile.sdcc
