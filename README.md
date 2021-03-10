@@ -1,15 +1,13 @@
-IntrOS [![Build Status](https://travis-ci.org/stateos/IntrOS-ATtiny817-Xplained-Mini.svg)](https://travis-ci.org/stateos/IntrOS-ATtiny817-Xplained-Mini)
-=======
+# IntrOS
+  [![CI](https://github.com/stateos/IntrOS-ATtiny817-Xplained-Mini/actions/workflows/test.yml/badge.svg)](https://github.com/stateos/IntrOS-ATtiny817-Xplained-Mini/actions/workflows/test.yml)
 
 Free, simple and tiny cooperative operating system (OS) designed for deeply embedded applications.
 TEMPLATE.
 
-Target
--------
+### Target
 
 ATtiny817-Xplained-Mini board.
 
-License
--------
+### License
 
 This project is licensed under the terms of [MIT License (MIT)](https://opensource.org/licenses/MIT).
