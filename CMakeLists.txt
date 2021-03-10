@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.8)
 
-set(CMAKE_TOOLCHAIN_FILE "$ENV{USERPROFILE}/Applications/.common/intros/cmake/config-attiny817xmini-gcc.cmake")
+set(CMAKE_TOOLCHAIN_FILE "common/intros/cmake/config-attiny817xmini-gcc.cmake")
 set(CMAKE_BUILD_TYPE     "Release")
 
 project(test)
