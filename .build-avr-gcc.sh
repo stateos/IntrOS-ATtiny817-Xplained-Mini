@@ -98,8 +98,8 @@ TIME_START=$(date +%s)
 
 makeDir()
 {
-	rm -rf "$1/"
-	mkdir -p "$1"
+	sudo rm -rf "$1/"
+	sudo mkdir -p "$1"
 }
 
 fixGCCAVR()
@@ -126,10 +126,10 @@ fixGCCAVR()
 }
 
 echo "Clearing output directories..."
-[ $FOR_LINUX  -eq 1 ] && sudo makeDir "$PREFIX_GCC_LINUX"
-[ $FOR_WINX86 -eq 1 ] && sudo makeDir "$PREFIX_GCC_WINX86"
-[ $FOR_WINX64 -eq 1 ] && sudo makeDir "$PREFIX_GCC_WINX64"
-[ $BUILD_LIBC -eq 1 ] && sudo makeDir "$PREFIX_LIBC"
+[ $FOR_LINUX -eq 1 ] && makeDir "$PREFIX_GCC_LINUX"
+[ $FOR_WINX86 -eq 1 ] && makeDir "$PREFIX_GCC_WINX86"
+[ $FOR_WINX64 -eq 1 ] && makeDir "$PREFIX_GCC_WINX64"
+[ $BUILD_LIBC -eq 1 ] && makeDir "$PREFIX_LIBC"
 
 echo "Clearing old downloads..."
 rm -f $NAME_BINUTILS.tar.xz
