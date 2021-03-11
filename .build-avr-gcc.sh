@@ -35,7 +35,7 @@ NAME_LIBC="avr-libc3.git" # https://github.com/stevenj/avr-libc3
 COMMIT_LIBC="d09c2a61764aced3274b6dde4399e11b0aee4a87"
 
 # Output locations for built toolchains
-BASE=./build/
+BASE=~/build/
 PREFIX_GCC_LINUX=${BASE}avr-${NAME_GCC}-x64-linux
 PREFIX_GCC_WINX86=${BASE}avr-${NAME_GCC}-x86-windows
 PREFIX_GCC_WINX64=${BASE}avr-${NAME_GCC}-x64-windows
