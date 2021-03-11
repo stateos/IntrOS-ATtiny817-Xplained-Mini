@@ -182,7 +182,7 @@ if [ $BUILD_BINUTILS -eq 1 ]; then
 	echo "Making Binutils..."
 	echo "Extracting..."
 	tar xf $NAME_BINUTILS.tar.xz
-	mkdir -p $NAME_BINUTILS/obj-avr
+	sudo mkdir -p $NAME_BINUTILS/obj-avr
 	cd $NAME_BINUTILS/obj-avr
 	[ $FOR_LINUX -eq 1 ] && confMake "$PREFIX_GCC_LINUX" "$OPTS_BINUTILS"
 	[ $FOR_WINX86 -eq 1 ] && confMake "$PREFIX_GCC_WINX86" "$OPTS_BINUTILS" --host=$HOST_WINX86 --build=`../config.guess`
@@ -197,7 +197,7 @@ if [ $BUILD_GCC -eq 1 ]; then
 	echo "Making GCC..."
 	echo "Extracting..."
 	tar xf $NAME_GCC.tar.xz
-	mkdir -p $NAME_GCC/obj-avr
+	sudo mkdir -p $NAME_GCC/obj-avr
 	cd $NAME_GCC
 	chmod +x ./contrib/download_prerequisites
 	./contrib/download_prerequisites
@@ -216,7 +216,7 @@ if [ $BUILD_GDB -eq 1 ]; then
 	echo "Making GDB..."
 	echo "Extracting..."
 	tar xf $NAME_GDB.tar.xz
-	mkdir -p $NAME_GDB/obj-avr
+	sudo mkdir -p $NAME_GDB/obj-avr
 	cd $NAME_GDB/obj-avr
 	[ $FOR_LINUX -eq 1 ] && confMakeGDB "strip gdb/gdb" "$PREFIX_GCC_LINUX" "$OPTS_GDB"
 	[ $FOR_WINX86 -eq 1 ] && confMakeGDB "$HOST_WINX86-strip gdb/gdb.exe" "$PREFIX_GCC_WINX86" "$OPTS_GDB" --host=$HOST_WINX86 --build=`../config.guess`
@@ -239,7 +239,7 @@ if [ $BUILD_LIBC -eq 1 ]; then
 		echo "Extracting..."
 		bunzip2 -c $NAME_LIBC.tar.bz2 | tar xf -
 	fi
-	mkdir -p $NAME_LIBC/obj-avr
+	sudo mkdir -p $NAME_LIBC/obj-avr
 	cd $NAME_LIBC/obj-avr
 	confMake "$PREFIX_LIBC" "$OPTS_LIBC" --host=avr --build=`../config.guess`
 	cd ../../
