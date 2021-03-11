@@ -33,4 +33,4 @@ jobs:
     - name: check avr-gcc version
       run: avr-gcc --version
     - name: make test
-      run: make all -f makefile.sdcc
+      run: make all -f makefile.gcc

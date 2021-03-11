@@ -3,8 +3,8 @@
 set -e
 
 OUTDIR="build"
-BINVER="2.31.1"
-GCCVER="8.2.0"
+BINVER="2.34"
+GCCVER="10.1.0"
 LIBVER="2.0.0"
 
 # get the source code
