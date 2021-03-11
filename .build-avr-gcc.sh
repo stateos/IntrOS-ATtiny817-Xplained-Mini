@@ -35,7 +35,7 @@ NAME_LIBC="avr-libc3.git" # https://github.com/stevenj/avr-libc3
 COMMIT_LIBC="d09c2a61764aced3274b6dde4399e11b0aee4a87"
 
 # Output locations for built toolchains
-BASE=
+BASE=/build/
 PREFIX_GCC_LINUX=${BASE}avr-${NAME_GCC}-x64-linux
 PREFIX_GCC_WINX86=${BASE}avr-${NAME_GCC}-x86-windows
 PREFIX_GCC_WINX64=${BASE}avr-${NAME_GCC}-x64-windows
@@ -126,10 +126,10 @@ fixGCCAVR()
 }
 
 echo "Clearing output directories..."
-[ $FOR_LINUX -eq 1 ] && makeDir "$PREFIX_GCC_LINUX"
-[ $FOR_WINX86 -eq 1 ] && makeDir "$PREFIX_GCC_WINX86"
-[ $FOR_WINX64 -eq 1 ] && makeDir "$PREFIX_GCC_WINX64"
-[ $BUILD_LIBC -eq 1 ] && makeDir "$PREFIX_LIBC"
+[ $FOR_LINUX  -eq 1 ] && sudo makeDir "$PREFIX_GCC_LINUX"
+[ $FOR_WINX86 -eq 1 ] && sudo makeDir "$PREFIX_GCC_WINX86"
+[ $FOR_WINX64 -eq 1 ] && sudo makeDir "$PREFIX_GCC_WINX64"
+[ $BUILD_LIBC -eq 1 ] && sudo makeDir "$PREFIX_LIBC"
 
 echo "Clearing old downloads..."
 rm -f $NAME_BINUTILS.tar.xz
