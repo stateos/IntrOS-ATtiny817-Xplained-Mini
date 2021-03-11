@@ -31,7 +31,7 @@ jobs:
         sudo apt-get -y -qq update
         sudo apt-get -y -qq install cmake ninja-build
     - name: build avr-gcc
-      run: bash ./.build-avr-gcc.sh
+      run: sudo bash ./.build-avr-gcc.sh
     - name: check avr-gcc version
       run: avr-gcc --version
     - name: make test
