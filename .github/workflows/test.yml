@@ -11,12 +11,12 @@ jobs:
     steps:
     - name: checkout repository
       uses: actions/checkout@v2
-      with:
-        submodules: recursive
+    - name: checkout common submodule
+      run: git submodule update --init --remote
     - name: install dependencies
       run: |
         sudo apt-get -y -qq update
-        sudo apt-get -y -qq install cmake ninja-build wget make mingw-w64 gcc g++ bzip2 git autoconf texinfo
+        sudo apt-get -y -qq install cmake ninja-build wget mingw-w64 bzip2 autoconf texinfo
     - name: build binutils
       run: bash ./.build-binutils.sh
     - name: build avr-gcc
