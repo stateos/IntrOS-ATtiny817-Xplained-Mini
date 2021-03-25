@@ -8,7 +8,7 @@ auto sem = Semaphore::Binary(0);
 auto sla = Task::Start([]
 {
 	sem.wait();
-	led_toggle(0);
+	led_toggle();
 });
 
 auto mas = Task::Start([]
@@ -19,6 +19,6 @@ auto mas = Task::Start([]
 
 int main()
 {
-	led_init(0);
+	led_init();
 	this_task::exit();
 }
