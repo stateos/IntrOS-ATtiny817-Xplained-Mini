@@ -13,12 +13,12 @@ auto sla = Task::Start([]
 
 auto mas = Task::Start([]
 {
-	this_task::sleepFor(SEC);
+	thisTask::sleepFor(SEC);
 	sem.give();
 });
 
 int main()
 {
 	led_init();
-	this_task::exit();
+	thisTask::exit();
 }
